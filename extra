@@ -1,0 +1,41 @@
+public class CoinToss {
+  public static void coin(int n, String prefix) {
+    if (n == 0) {
+      System.out.println(prefix);
+    }
+    else {
+      coin(n - 1, prefix + "H");
+      coin(n - 1, prefix + "T");
+    }
+  }
+
+  public static void main(String[] args) {
+    coin(3, "");
+  }
+}
+import java.util.HashSet;
+import java.util.Set;
+
+public class Permutation {
+    public static Set<String> solve(String str) {
+        Set<String> ans = new HashSet<String>();
+        if (str == null || str.length() == 0) {
+            ans.add("");
+            return ans;
+        }
+        char ch = str.charAt(0);
+        String rem = str.substring(1);
+        Set<String> temp = solve(rem);
+        for (String word : temp) {
+            for (int i = 0; i <= word.length(); i++) {
+                ans.add(word.substring(0, i) + ch + word.substring(i));
+            }
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        String str = "abc";
+        System.out.println(solve(str));
+    }
+}
